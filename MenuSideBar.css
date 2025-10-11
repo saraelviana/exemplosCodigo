@@ -1,0 +1,160 @@
+*{
+    margin: 0;
+    padding: 0;
+    /*zerou tudo,tudo no canto esquerdo*/
+
+    -webkit-box-sizing: border-box;
+    /*-webkit-box-sizing... servia para garantir a compabiblidade com navegador... hoje usa-se : box-sizing*/
+    
+    box-sizing: border-box;
+    /*box-sizing.. define como o navegador calcula o tamanho total de um elemento(largura e altura ) levando em conta o conteudo*/
+
+    -webkit-appearance: none;
+    /*-webkit-appearance... remove a aparencia padrao de alguns elementos como botoes,inputs... ou força um estilo nativo*/
+    appearance: none;
+
+    font-family: 'Times New Roman', Times, serif;
+
+
+}
+
+body,html{
+    overflow-x: hidden;
+    /*define o que  acontece quando o conteudo de um elemento e mais largo do que o proprio elemento*/
+    /*overflow-x controla como o conteudo e exibido no eixo horizontal*/
+    /*
+    visible - mostra todo o conteudo mesmo que ultrapasse o elemento padrao
+    hidden - oculta o conteudo que ultrapassa a largura
+    scroll - Sempre mostra uma barra de rolagem horinzontal,mesmo se nao precisar
+    auto - mostra a barra de de rolagem somente quando for necessario
+    */
+
+    
+}
+
+.menu{
+    background-color: #131313;
+    /*cor da barra de menu ate o fim da tela*/
+
+    position: fixed;
+    /*cortou o background-color: #131313, deixando apenas alinhando com as plavras do menu*/
+
+    overflow: hidden;
+    /*overflow-x controla como o conteudo e exibido no eixo horizontal*/
+    
+    height: 100vh;
+    /*desta forma , ficou uma coluna, #131313 */
+
+    /*aqui inicia os efeitos para recolher e deixar apenas os simbolos*/
+    /**/
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 70px;/*aqui ele corta pra ficar so os simbolos */
+    -webkit-transition:all 0.3s linear;
+    transition: all 0.3s linear;
+    -webkit-transform: translateZ(0) scale(1,1);
+    transform: translateZ(0) scale(1,1);
+}
+
+.menu > ul{
+    margin: 5px 0;
+    /*desceu as letras um pouco pra baixo*/
+}
+
+.menu li{
+    position: relative;
+    display: block;
+    width: 250px;
+    /*aqui aumentou a largura .. background-color: #131313;*/
+
+}
+.menu li > a{ /**/
+    position: relative;
+    width: 255px;
+    color: white;
+    display: table;
+    font-size: 16px;
+    text-decoration: none;/*tirou o traço debaixo*/
+    -webkit-transform: translateZ(0)scale(1,1);
+    /*
+    ele serve para aplicar transformaçoes graficas em elementos como: 
+    girar,mover,aumentar,diminuir,inclinar, ou ate combinar varias transformaçoes de uma vez.. 2D ou 3D
+    .. elemento{ 
+     assim atual -> transform: translateZ(0) scale(1,1);
+    */
+
+    transform: translateZ(0) scale(1,1);
+
+    -webkit-transition: all 0.15s linear;
+    transition: all 0,15s linear;
+
+    /*se ficarate aqui , nao alterou nada de efeito*/    
+
+}
+.menu .span-menu{
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+
+    width: 180px;
+    /*aqui sim ,deixou os itens no centro,possibilitando quando encolida aparecer apenas os simbolos*/
+
+}
+
+.lista{
+    background-color: #131313;
+    text-transform: capitalize;
+}
+
+.lista-logo, .li-empresa, .li-contato{
+    background-color: #010101; /*aqui dividiu em blocos*/
+    text-transform: capitalize;
+
+
+}
+
+.menu li:hover a, nav.menu li.active > a {
+    color: #fff;
+    background-color: #282828;/*aqui o efeito ao mouser passar*/
+
+}
+nav{
+    -webkit-user-select: none;
+    user-select: none;
+    box-shadow: 0 0 10px #282828;/*leve sombra na borda*/
+
+}
+
+.fa{
+    position: relative;
+    width: 60px;
+    height: 40px;
+    text-align: center;
+}
+
+.menu:hover, nav.menu.expanded{
+    width: 250px; /*passou o mouse ele abrir nesta largura*/
+    overflow: hidden;
+}
+
+.home{
+    width: 100%;
+    height: 97vh;/*passou disso aparece a barra de rolagem*/
+    background: url(img/imagem\ 100X100.png);
+
+    /*
+    background: rgb(57, 46, 116,0,8)url(img/imagem\ 100X100.png)
+    rgb(57, 46, 116,0,8) - no desenho dele as linhas do desenho ficam roxo, quando ele coloca o background-blend-mode: darken;
+    */
+    
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    background-blend-mode: darken;
+
+}
+
+/*registro que funcionou certinho, que por nao ter os simbolos quando recolher as opços nao tem as engrenagens , mas vou melhorar*/

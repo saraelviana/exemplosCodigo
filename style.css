@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    /*tudo que for feito no objeto filho nao vai transpassar para o pai*/
+
+
+}
+
+nav{
+    background-color: #5333;
+}
+
+nav li{
+    /*vamos deixar um do lado do  outro*/
+
+
+    display: inline-block;
+    /*deixou um do lado do outro*/
+
+    
+}
+
+nav li a{
+    /*o que esta dentro do LI*/
+    display: inline-block; /*aqui engrossou */
+    color: white;
+    text-decoration: none;
+    padding: 15px; /*espaçamento entre as opçoes*/
+
+}

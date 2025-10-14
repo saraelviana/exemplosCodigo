@@ -1,0 +1,132 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a{
+    color: rgb(241, 7, 7);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+a:hover{
+    opacity: 0.7;
+}
+
+
+
+.logo{
+    font-size: 24px; /*tamanho letra*/
+    text-transform: uppercase;
+    letter-spacing: 4px;
+
+}
+nav{
+    display: flex;
+    /*para colocar a logo e a lista um do lado do outro*/
+
+    justify-content: space-around;
+    /*o espaço ao redor seja a metade do espaço de entre eles*/
+
+    align-items: center;
+    /*vamos alinhar centro o sistema*/
+
+    font-family: 'Times New Roman', Times, serif;
+
+    background: #23232e;
+
+    height: 8vh;
+    /*altura*/
+}
+
+main{
+    /*background: url(img/superfestval_logo-canto.jpg) no-repeat center center;*/
+    background-image: url(img/superfestval_logo-canto.jpg);
+    /*seu posicionamento no eixo X e Y*/
+
+    background-size: cover;
+    /*caso a resolução do meu monitor for maior que da imagem*/
+
+    height: 92vh;
+}
+
+.nav-list{
+    list-style: none;
+    display: flex;
+}
+.nav-list li{
+    letter-spacing: 3px;
+    margin-left: 32px;
+
+}
+.mobile-meneu div{
+    width: 32px;
+    height: 2px;
+    background:white ;
+    margin: 8px;
+
+}
+.mobile-meneu{
+    display: none;
+    cursor: pointer;
+}
+@media (max-width:999px){
+
+    /*deu um problema,transform: translateX(100%); deixa tudo pra fora*/
+    body{
+        overflow-x: hidden;
+        /*se algo transborda,fique escondido no body*/
+
+    }
+    .nav-list{
+        position: absolute;
+        top: 8vh;/*pra ficarlogo abaixo do header*/
+        right: 0;/*ja que o menu ficara na direita*/
+        width: 50vw;
+        height: 92vh;
+        background: #23232e;
+        flex-direction: column;/*aqui a coluna*/
+        align-items: center;
+        justify-content:space-around;
+        /*space-around = espalha*/
+        /* end = la em baixo*/
+        /*space-between= em linhas de 2 pulos*/
+        /*space-evenly = centraliza mas entre eles*/
+
+        /*começa aqui o efeito de recolher*/
+        transform: translateX(100%);
+
+        transition: transform 0.3s ease-in;
+        /*para a aimação nao ficartao seca,ease-in e uma chegada suave*/
+
+
+    }
+    .nav-list li{
+        margin-left: 0;
+        /*para ficar corretamente ao centro*/
+        opacity: 0;/*apagaram*/
+
+    }
+    .mobile-meneu{
+        display: block;
+        /*flex box automaticamente ja se ajusta*/
+    }
+}
+
+.nav-list.active{
+    /*quando estiver ativa*/
+    transform: translateX(0);
+}
+
+/*aqui o efeito que busco*/
+
+@keyframes navLinkFade{
+    from{
+        /*ira de um ponto ao outro*/
+        opacity: 0;
+        transform: translateX(50px);/*uma leve movimentação */
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);/*voltando a posição inicial*/
+    }
+}

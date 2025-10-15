@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Degradê com Movimento</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: black;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .gradiente-texto {
+        font-size: 3em;
+        font-weight: bold;
+        background: linear-gradient(
+          90deg,
+          #ff5733,
+          #ffbd33,
+          #75ff33,
+          #33ffd6,
+          #3375ff,
+          #d633ff
+        );
+        background-size: 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradienteMove 5s infinite;
+      }
+
+      @keyframes gradienteMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .container {
+        text-align: center;
+      }
+
+      .container p {
+        font-size: 1.2em;
+        margin-top: 20px;
+        color: #333;
+      }
+
+      footer {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        text-align: center;
+        font-size: 0.9em;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="gradiente-texto">Festval</h1>
+      <p>Efeito com CSS e animação de <code>background-position</code>!</p>
+    </div>
+    <footer>&copy; 2024 Desenvolva como Dev</footer>
+  </body>
+</html>

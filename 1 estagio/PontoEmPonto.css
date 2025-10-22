@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+  width: 200px;
+  height: 200px;
+  background: rgb(209, 209, 209);
+  box-shadow: 10px 10px 20px gray;
+    
+  
+    
+}
+
+
+

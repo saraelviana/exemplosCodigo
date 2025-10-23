@@ -1,16 +1,29 @@
 *{
     margin: 0;
     padding: 0;
+
+}
+header nav{
+  background-color: lightblue;
+  border: 5px solid rgb(253, 194, 253);
+  background-clip: content-box;
+  border-radius: 5px;
 }
 body{
-  width: 200px;
-  height: 200px;
-  background: rgb(209, 209, 209);
-  box-shadow: 10px 10px 20px gray;
-    
+  background-image: url(ChatGPT\ Image\ 22\ de\ out.\ de\ 2025\,\ 17_53_54.png);
   
-    
+  background-position: 50% 20%;
+
+
 }
+
+
+/*
+
+
+
+*/
+
 
 
 

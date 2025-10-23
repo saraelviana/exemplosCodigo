@@ -1,0 +1,167 @@
+.cartao{
+    margin: 0 auto;
+    padding: 2em;
+    width: 300px;
+    background: #1c1f2b;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+    /*
+    você está dizendo que o elemento pode ser movido em relação à sua posição original, sem sair do fluxo da página.
+    Ou seja: ele continua ocupando o mesmo espaço, mas pode ser deslocado visualmente com as propriedades:
+
+    Usos comuns de relative
+    Definir um “referencial” para elementos absolute filhos.
+
+
+
+    */
+
+}
+@property --angle{
+    /*
+    Com @property, você diz explicitamente:
+
+    qual é o nome da variável;
+    qual é o tipo de valor que ela aceita (ex: cor, número, comprimento...);
+    qual é o valor inicial;
+    e se ela pode ser animada.
+
+    syntax:
+    Define o tipo de valor que a variável aceita 
+    (<color>, <number>, <length>, <angle>, etc.)
+
+    inherits:
+    Diz se a propriedade é herdada pelos elementos filhos (true ou false)
+
+    initial-value:
+    Define o valor padrão caso nada seja definido no CSS
+
+    @property
+   “Registra” oficialmente a variável para o navegador poder manipulá-la
+    
+    */
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+    
+
+
+
+
+}
+
+.cartao::after, .cartao::before{
+    /*pseudoelemento - ::after*/
+    /*O ::after cria um elemento virtual que aparece depois do conteúdo real do elemento .cartao.*/
+
+    
+
+
+    content: '';
+    /* A propriedade content no CSS é usada junto com pseudoelementos (::before e ::after) — e serve para inserir conteúdo gerado pelo CSS (texto, ícones, imagens, etc.) dentro da página. */
+
+    position: absolute;
+    /* A propriedade position: absolute; no CSS serve para posicionar um elemento de forma exata na página, fora do fluxo normal do layout.*/
+    /* Quando você usa:position: absolute;
+    o elemento sai do fluxo normal (como se “flutuasse” sobre os outros) e pode ser colocado em qualquer posição usando as propriedades:
+    top - right - bottom - left
+
+    */
+
+    height: 100%;
+    width: 100%;
+
+    background-image: conic-gradient(from var(--angle),transparent 70%,#ff4545,#00ff99,#006aff,#ff0095,#ff4545);
+    /*
+    começar a entender o efeito:
+    background-image: conic-gradient(transparent,blue);
+    background-image: conic-gradient(transparent 70%,blue);
+
+    agora começa o efeito de andar 
+    background-image: conic-gradient(from 20deg,transparent 70%,blue);
+    background-image: conic-gradient(from 80deg,transparent 70%,blue);
+
+    CRIAR -> --angle:0deg;
+    background-image: conic-gradient(from var(--angle),transparent 70%,blue);
+
+
+
+    #ff4545,#00ff99,#006aff,#ff0095,#ff4545
+    background-image: conic-gradient(#ff4545,#00ff99,#006aff,#ff0095);- ficou lega
+    background-image: conic-gradient(red,blue);-ja fica legal
+    background: red; 
+    /*
+    /*
+    background: red; foi colocado para alinhar no eixo apenas depoois vai mudar
+    */
+    top: 50%;/*subiu um pouco em relação ao eixo*/
+    left: 50%;/*neste nao mudou nada*/
+
+    translate: -50% -50%; /*aqui cobre a imagem */
+    /*
+    translate é uma das funções mais usadas em transformações 2D e 3D no CSS.
+    O que é translate
+    A propriedade translate move (desloca) um elemento no eixo X 
+    (horizontal) e/ou no eixo Y (vertical) — sem alterar o espaço 
+    original dele na página.
+    */
+
+    z-index: -1; 
+    /*como foi deixado os cantos redondo , ficou a ponta vermelho, vamos colocar um paddin para ficar melhor o cotorno*/
+
+    padding: 5px;
+    /*paddin para ficar melhor o cotorno*/
+
+    border-radius: 10px;
+    /*os cantos tambem arendondar*/
+
+    animation: 3S spin linear infinite;
+    /*
+    animation: [duração] [nome-da-animação] [curva-de-tempo] [repetição];
+    | Propriedade   | O que faz           | Exemplo       |
+
+    animation-delay|tempo antes de começar|1s         |
+
+    animation-iteration-count|QTD vezes repete|5 ou `infinite`|
+
+    animation-direction|sentido da animação|normal,reverse,alternate|
+    
+    animation-timing-function|ritmo da animação|ease,linear,ease-in-out
+
+    */
+
+
+}
+.cartao::before{
+
+   
+    filter: blur(1.5rem);
+    /*
+    Ela altera a aparência visual de um elemento, aplicando efeitos como:
+    blur (desfoque) - brightness (brilho) - contrast (contraste)
+    grayscale (preto e branco) - sepia (tom amarelado antigo)
+    invert (inverter cores) - hue-rotate (mudar o tom da cor)
+    saturate (intensidade das cores) - drop-shadow (sombra)
+    */
+
+    opacity: 0.5;
+    /*diminui um pouco*/
+
+
+}
+
+@keyframes spin{
+    /*
+    A regra @keyframes serve para definir as etapas (quadros) de uma animação no CSS.
+    É dentro dela que você diz o que muda durante a animação (como cor, posição, rotação, opacidade etc)
+    */
+    from{
+        --angle:0deg;
+
+    }to{
+        --angle:360deg;
+    }
+
+}
+

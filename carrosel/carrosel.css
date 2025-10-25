@@ -1,0 +1,67 @@
+
+body{
+    background-color: black;
+}
+.carrosel{
+    margin: 100px auto;
+    width: 90%;
+    border: 5px solid red;/*quadrado */
+    display: flex;
+    overflow-x: auto;/*diminui o quadrado RED e as imagens dentro ficou com barra de rolagem para poder ver as DIV,ficou LEGA*/
+    /*
+    Quando o conteúdo é maior que a largura da caixa (div, section, etc.), ele pode “vazar” para fora.
+    O overflow-x define o que fazer com esse excesso
+    -overflow-x → controla o eixo horizontal (esquerda ↔ direita)
+    -overflow-y → controla o eixo vertical (cima ↕ baixo)
+    -overflow → controla ambos ao mesmo tempo
+    
+    */
+    gap: 1em;
+    
+    /*
+    se deixar assim:animation: spin 5s infinite;
+
+    ele vai sentindo da direita para esquerda apenas e volta, e detalhe! vai a caixa completa, por isso elatem que ficar la no .grupo
+    */
+
+
+}
+/*animação*/
+.carrosel::-webkit-scrollbar{
+    display: none;/*tirou a barra de rolagem */
+
+}
+
+
+
+.grupo{
+    display: flex;/*aqui a caixa ficou no eixo no meio da tela*/
+    align-items: center;
+    justify-content: center;
+    gap: 1em;/*aqui dividiu ,faixas brancas*/
+    animation: spin 5s infinite linear;
+    padding-right: 1em;
+
+}
+.card{
+    height: 5em;/*aqui o quadrado vermelho virou um cartao*/
+    padding: 1em;/*descolamento da margim esquerda*/
+    background: lightblue;/*aqui ficou apenas uma coluna,esqueda card*/
+    font-size: 3em;/*tamanho fonte,cresceu o background*/
+    border-radius: .2em;/*canto do card azul*/
+    text-align: center;
+    align-content: center;/*aqui ficou maior e dar pra notar os cantos das div ,separando */
+    /*flex: 0 0 5em;/*aumentou tudo  */
+    flex: 1 1 0;
+    gap: 1em;/*ele separa mas vai grudando sozinho no vamente entre o 6  e o 7*/
+
+
+}
+@keyframes spin{
+    /*
+    é usado para definir animações, e o nome spin geralmente é apenas o nome da animação que faz um elemento girar.
+    */
+    from{ translate: 0;}
+    to{translate: -100%;}
+
+}

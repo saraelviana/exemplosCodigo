@@ -1,0 +1,81 @@
+
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    color: black;
+    font-size: 1.5rem;
+    display: grid;
+    place-items: center;
+    height: 90vh;
+    align-content: center;
+
+
+}
+.container{
+    width: 900px;
+    height: 400px;
+    position: relative;
+    background-color: rgb(121, 1, 233);
+    border-radius: 24px;
+    background-image: url(festval_cortada.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 100%;/*centralizou a imagem aqui*/
+
+    & .m{
+        background-color: rgb(243, 1, 171);
+        position: absolute;
+        /*text-align: center;*/
+        height: 40px;
+        width: 15%;
+        bottom: 0;/*aqui o botao caiu do canto superior do lado direito,para o canto inferior do lado direito*/
+        right: 0;/*aqui ele foi para o canto inferior do lado dieito*/
+        border-radius: 24px;
+        outline: 10px solid white;
+        display: grid;
+        place-items: center;/*centralizou o texto dentro*/
+        transition: 0.5s;
+
+        &::before,&::after{
+            position: absolute;
+            content: '';
+            width: 24px;
+            aspect-ratio: 1;
+            background: radial-gradient(circle 24px at top left,
+            black 98%, white);
+            background-color: red;
+
+        }
+        &::before{
+            left: 34px;/*aqui o ackground-color: red;.. aumentou o seu comprimento */
+            bottom: 0;/*desceu o vermelho do ,left: 34px...descentralizou*/
+            top: 26px;
+            width: 34px;
+
+
+        }
+        &::after{
+            top: 34px;
+            right: 10px;
+            width: 34px;
+        }
+
+        span{
+            display: grid;
+            color: white;/*mudou a cor da letra aqui*/
+            place-items: center;
+            overflow: hidden;
+            width: 1.1ch;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        
+
+    }
+    
+    
+}

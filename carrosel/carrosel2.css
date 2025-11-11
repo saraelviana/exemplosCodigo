@@ -1,0 +1,55 @@
+
+body{
+    background-color: rgb(71, 71, 71);
+}
+
+.carroseu{
+    width: 100%;
+    overflow-x: auto;/*este,erflow-x: auto;... deixou uma barra de rolagem  abaixo da imagem*/
+    margin: 3em auto;
+    display: flex;
+    gap: 1em;
+    scroll-behavior: smooth;
+}
+/*aqui vai ser o efeito*/
+.carroseu ::-webkit-scrollbar{
+    display: none;
+
+}
+
+.carroseu::-webkit-scroll-button(right){
+    content: 'next';
+    border: none;
+    background-color: blueviolet;
+
+}
+
+/*
+.carroseu ::scroll-button(right){/*assim,.carroseu ::-webkit-scrollbar-button()*/
+ /*   content:'>';/*aqui o simbolo ou palavra*/
+ /*   border:none;
+    background-color: chartreuse;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3rem;
+    color: white;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    padding-bottom: .1em;
+    cursor: pointer;
+
+
+}
+
+*/
+
+
+.card{
+    flex: 0 0 20em;/*este,flex: 0 0 20em; deixou o card maiores,sem ele ,fica fininho*/
+    height: 12em;
+    background-color: blueviolet;
+    padding: 1em;
+    border-radius: .5em;
+    text-align: center;
+    align-items: center;
+}

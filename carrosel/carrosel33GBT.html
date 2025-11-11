@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Carrossel Responsivo com Swipe (9 imagens)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-image: url(ChatGPT\ Image\ 22\ de\ out.\ de\ 2025\,\ 17_53_54.png);
+      /*background: #222;*/
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      padding: 24px;
+    }
+
+    .carousel {
+      --n: 9;
+      width: 95%;
+      max-width: 1000px;
+      background: #111;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+      position: relative;
+
+      /* altura responsiva: entre 220px e 500px, preferindo 40vw */
+      height: clamp(220px, 40vw, 500px);
+      touch-action: pan-y; /* permite swipe horizontal customizado */
+    }
+
+    .carousel-track {
+      display: flex;
+      width: calc(var(--n) * 100%);
+      transition: transform 0.6s ease;
+      will-change: transform;
+      height: 100%;
+    }
+
+    .carousel-slide {
+      flex: 0 0 calc(100% / var(--n));
+      display: block;
+      user-select: none;
+      height: 100%;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
+    .btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: rgba(0,0,0,0.45);
+      border: none;
+      color: #fff;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      cursor: pointer;
+      transition: background 0.18s, transform 0.12s;
+    }
+    .btn:hover { background: rgba(255,255,255,0.12); transform: translateY(-50%) scale(1.03); }
+    .btn:active { transform: translateY(-50%) scale(.98); }
+    .btn.prev { left: 12px; }
+    .btn.next { right: 12px; }
+
+    /* maior área tátil em telas pequenas */
+    @media (max-width: 720px) {
+      .btn { width: 56px; height: 56px; font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="carousel" id="carousel">
+    <button class="btn prev" aria-label="Anterior">&#10094;</button>
+
+    <div class="carousel-track">
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=1" alt="1"></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=2" alt="2"></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=3" alt="3"></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=4" alt="4"></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=5" alt="5"></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=6" alt="6"></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=7" alt="7"></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=8" alt="8"></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=9" alt="9"></div>
+    </div>
+
+    <button class="btn next" aria-label="Próxima">&#10095;</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const carousel = document.getElementById('carousel');
+      if (!carousel) return;
+
+      const track = carousel.querySelector('.carousel-track');
+      const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+      const total = slides.length;
+      const prevBtn = carousel.querySelector('.prev');
+      const nextBtn = carousel.querySelector('.next');
+
+      carousel.style.setProperty('--n', total);
+      if (!track || total === 0) return;
+
+      let index = 0;
+      let startX = 0;
+      let currentDelta = 0;
+      let isPointerDown = false;
+
+      // recalcula largura do slide (px)
+      function slideWidthPx() {
+        return carousel.clientWidth;
+      }
+
+      function updateTransform(withTransition = true) {
+        if (withTransition) track.style.transition = 'transform 0.6s ease';
+        else track.style.transition = 'none';
+
+        const base = -index * slideWidthPx(); // em px
+        track.style.transform = `translateX(${base + currentDelta}px)`;
+      }
+
+      // navega para index e zera delta
+      function goTo(i) {
+        index = ((i % total) + total) % total;
+        currentDelta = 0;
+        updateTransform(true);
+      }
+
+      nextBtn && nextBtn.addEventListener('click', () => goTo(index + 1));
+      prevBtn && prevBtn.addEventListener('click', () => goTo(index - 1));
+
+      // TECLADO (opcional)
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') goTo(index + 1);
+        if (e.key === 'ArrowLeft') goTo(index - 1);
+      });
+
+      /* ---------- suporte a swipe (pointer) ---------- */
+      // usa pointer events (funciona em touch e mouse)
+      track.addEventListener('pointerdown', (e) => {
+        isPointerDown = true;
+        startX = e.clientX;
+        currentDelta = 0;
+        track.setPointerCapture(e.pointerId);
+        updateTransform(false); // sem transição enquanto arrasta
+      });
+
+      track.addEventListener('pointermove', (e) => {
+        if (!isPointerDown) return;
+        const dx = e.clientX - startX;
+        currentDelta = dx;
+        updateTransform(false);
+      });
+
+      function endPointer(e) {
+        if (!isPointerDown) return;
+        isPointerDown = false;
+        // threshold para considerar swipe (px)
+        const threshold = Math.max(40, slideWidthPx() * 0.12);
+        if (currentDelta <= -threshold) {
+          goTo(index + 1);
+        } else if (currentDelta >= threshold) {
+          goTo(index - 1);
+        } else {
+          // volta para o slide atual
+          currentDelta = 0;
+          updateTransform(true);
+        }
+      }
+
+      track.addEventListener('pointerup', endPointer);
+      track.addEventListener('pointercancel', endPointer);
+      track.addEventListener('pointerleave', endPointer);
+
+      // Recalcula posição correta ao redimensionar (ex.: rotacionar celular)
+      window.addEventListener('resize', () => {
+        // pequena pausa para a nova largura assentar
+        setTimeout(() => updateTransform(false), 50);
+      });
+
+      // posição inicial
+      updateTransform(true);
+    });
+  </script>
+</body>
+</html>

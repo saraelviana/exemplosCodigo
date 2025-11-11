@@ -1,0 +1,90 @@
+/*
+o que e. clip-rule: ;
+
+*/
+
+/*
+Ellipse
+similar ao circulo mas com flexibilida
+circulo tem 1 raio
+ellipse tem 2 raios
+rx=X-Axis(horizontal raio)
+ry=Y-Axis(vertical raio
+
+*/
+/*
+.shape{
+    height: 100px;
+    width: 100px;
+    background: blue;
+}
+*/
+
+/*
+.circle{
+    clip-path: circle();
+    syntax: clip-path: circle(radius at cx cy )
+    radius-> e ele que diz o tamanho
+    
+    
+    height: 100px;
+    width: 100px;
+    background: blue;
+}
+
+*/
+
+.circle2{
+    
+    height: 100px;
+    width: 100px;
+    clip-path: circle(50px at 100px 100px);
+    background: blue;
+}
+
+.circle3{
+    clip-path:circle(50px at left top);
+    background: blue;
+    
+    height: 200px;
+    width: 200px;
+
+}
+
+.circle4{
+    clip-path: circle(50px at right top);
+    background: blue;
+    height: 200px;
+    width: 200px;
+
+}
+
+
+
+.elipse{
+    display: flex;
+    clip-path: ellipse(80px 50px at 50% 50%);/* clip-path: ellipse( rx ry at cx cy );*/
+    background: blue;
+}
+.elipse2{
+    clip-path: ellipse(60px 30px at center);
+    background: blue;
+    
+}
+.elipse3{
+    clip-path: ellipse(40% 50% at 50% 50%);/*quando eu uso % ele tenta pegar a area toda desta % (estica na horizontal)*/
+    background: blue;
+    
+}
+.retangulo{
+     /*
+    clip-path: inset(top right bottom left round(border-radius));
+    e um retangulo- right,top,left,bottom
+    
+    */
+    clip-path: inset(20px 30px 40px 10px round 10px);
+    background: blue;
+}
+
+
+

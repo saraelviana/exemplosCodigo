@@ -1,0 +1,77 @@
+/* Estilos Gerais */
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f4f4f9;
+}
+
+.container {
+    display: flex; /* Para alinhar as divs lado a lado */
+    flex-wrap: wrap; /* Permite quebrar linha se necessário */
+    gap: 50px; /* Espaço entre as caixas */
+    padding: 30px;
+    border: 2px solid #ccc;
+    background-color: #fff;
+}
+
+/* Estilo Padrão para Todas as Divs */
+.box {
+    width: 150px;
+    height: 100px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 1px solid #333;
+    /* Adiciona uma transição para o efeito visual suave ao passar o mouse */
+    transition: transform 0.3s ease;
+}
+
+/* Classes de Cores (as 7 cores diferentes) */
+.div-1 { background-color: #FF5733; } /* Laranja avermelhado */
+.div-2 { background-color: #33FF57; } /* Verde claro */
+.div-3 { background-color: #3357FF; } /* Azul brilhante */
+.div-4 { background-color: #FF33A1; } /* Rosa choque */
+.div-5 { background-color: #33FFF6; } /* Ciano */
+.div-6 { background-color: #FFBD33; } /* Amarelo dourado */
+.div-7 { background-color: #8D33FF; } /* Roxo */
+
+/* Aplicação das Transformações no HOVER */
+/* O hover mostra o efeito da transformação */
+
+/* 1. Desloca 50px no eixo X (Horizontal) para a direita */
+.div-1:hover {
+    transform: translateX(50px);
+}
+
+
+/* 2. Desloca 30px no eixo Y (Vertical) para baixo */
+.div-2:hover {
+    transform: translateY(30px);
+}
+
+/* 3. Desloca 20px no eixo X e 40px no eixo Y */
+.div-3:hover {
+    transform: translate(20px, 40px);
+}
+
+/* 4. Rotaciona o elemento em 45 graus */
+.div-4:hover {
+    transform: rotate(45deg);
+}
+
+/* 5. Aumenta a largura em 50% (1.5 vezes o tamanho original) */
+.div-5:hover {
+    transform: scaleX(1.5);
+}
+
+/* 6. Diminui a altura em 30% (0.7 vezes o tamanho original) */
+.div-6:hover {
+    transform: scaleY(0.7);
+}
+
+/* 7. Inclina o elemento em 15 graus no eixo X (Horizontal) */
+.div-7:hover {
+    transform: skewX(15deg);
+}

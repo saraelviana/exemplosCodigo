@@ -1,0 +1,115 @@
+/*
+agora como eu digo que vai ser flex! assim -> display:flex;
+
+*/
+body{
+    background-color: #fdae81;/*cor de fundo*/
+}
+.container{
+    display: flex;/*ocupar a largura toda da tela*/
+    background-color: #6366f1;/*cor de fundo*/
+    gap:10px ;/*colocar um espaçamento entre os itens ,para quantidade de espaço que deseja*/
+   /* height: 600px;*/
+   /* flex-direction:column;/*e apenas do pai,para definir a direção */
+    flex-wrap: wrap;
+    /*row-row-reverser...colunm-column-reverse...*/
+    /* flex-wrap:; -- para permetir que os itens sejam agrupados quando necessario
+      a propriedade sao: 
+      nowrap-> 
+      wrap-> vai quebrar para linha abaixo , quando nao tiver mas espaço 
+      wrap-reverse-> vai quebrar a ordem ao contrario, quando nao tiver mas espaço 
+      */
+    /*flex-flow:column wrap;/*e a junção dos 2...*/
+    /*
+    1 - definição , se ele vai ser colunm ou row
+    2 - depois se ele vai ser,nowrap,wrap,row-reverser...etc..
+    */
+    /*justify-content:center ;/*apenas no pai,alinha horizontalmente o eixo X*/
+    
+    /*
+    por padrao ja e flex-start
+    flex-end- no fim da tela
+    center - alinhar as div no centro
+    spece-beteween - colocar o mesmo espaçamento em todos os elementos
+    space-around - que vai ser distribuido o mesmo espaço ao redor 
+    space-evenly - conta os lados, coloca o espaçamento entre eles
+    normal usamos um align-items: ceter junto com o justify-content:center ;
+    */
+    align-items: center;
+    /*
+    temos o 
+    center-vai ficar no centro
+    end- vai ficar abaixo no canto esquerdo
+    flex-end
+    self-end
+    */
+
+
+    /*
+    aqui fica do jeito que eu quero
+
+    .container
+    display:flex;
+    gap:10px; *** o 1 e linha o 2 e a coluna assim->gap:10px 30px;***
+              *** pode trabalhar individual assim ->row-gao:10px ... colunm-gap:30px;
+     
+    flex-wrap:wrap;
+    align-items:center;
+    *** aqui ja fica todas uma do lado da outra,igual as paginas de vendas**
+
+    */
+
+}
+.item{/*sem definição previa ,vai ocupar o minimo espaço que o item esta contendo*/
+    width: 200px;/*largura*/
+    height: 200px;/*altura*/
+    background-color:#38bdf8 ;
+
+
+
+
+
+}
+
+
+.item3{
+    flex-grow:1 ;/*ele vai determinar a quantidade disponivel dentro do contaeiner que o item de ocupar*/
+                /*se retirar o width do Pai , o item3 vai ocupar todo o restante do espaço do container*/
+    /*
+    fle-shrink, tem que tirar o flex-wrap:wrap; do Pai para poder funcionar, pois nao pode quebrar a div
+    flex-shrink:2; -> ele vai diminuir um pouco mas este item , em comparação as outras div
+
+    */
+
+    /*flex-basis: 20px;
+    para definir um tamanho especifico para o que eu quero para aquele item em %
+    */
+
+    /*
+    flex
+    a junção das 3 flex- grow shrink basic .. esta e a sequencia
+    flex: 2 (grow) 2 (shrink) 30px (basic)
+    */
+
+    /*
+    usar align-self *** tem que deixar o Pai ... display: flex;...Heigth:600px;...
+
+    */
+    align-self: center;
+    /*
+    center- alinha o item ao centro
+    flex-end- joga para baixo
+    flex-start- ja vem neste padrão se nao colocar nada
+
+    */
+    order: 2;/*tem que desabilitar -> align-self: center;... pra poder funcionar*/
+
+    /*ele coloca em ordem, por padrao quando voce usa a tag os demais itens ficam co m0 se nao forem alterado
+    pode alterar os outros assim...-> 
+    .item4{
+    ordem:6;
+     }
+    ai cada item tera sua posição
+    */
+
+}

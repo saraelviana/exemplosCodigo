@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exemplos de clip-path</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .shape {
+      width: 180px;
+      height: 180px;
+      background: url("https://picsum.photos/300") center/cover;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .shape:hover {
+      transform: scale(1.05);
+    }
+
+    .label {
+      text-align: center;
+      margin-top: 8px;
+      font-weight: bold;
+    }
+
+    /* Formas com clip-path */
+    .circle {
+      clip-path: circle(50% at 50% 50%);
+    }
+
+    .ellipse {
+      clip-path: ellipse(60% 40% at 50% 50%);
+    }
+
+    .polygon {
+      clip-path: polygon(50% 0, 0 100%, 100% 100%);
+    }
+
+    .inset {
+      clip-path: inset(20px 10px);
+    }
+
+    .path {
+      clip-path: path('M10,80 Q95,10 180,80 T350,80');
+    }
+  </style>
+</head>
+<body>
+
+  <div>
+    <div class="shape circle"></div>
+    <div class="label">circle()</div>
+  </div>
+
+  <div>
+    <div class="shape ellipse"></div>
+    <div class="label">ellipse()</div>
+  </div>
+
+  <div>
+    <div class="shape polygon"></div>
+    <div class="label">polygon()</div>
+  </div>
+
+  <div>
+    <div class="shape inset"></div>
+    <div class="label">inset()</div>
+  </div>
+
+  <div>
+    <div class="shape path"></div>
+    <div class="label">path()</div>
+  </div>
+
+</body>
+</html>

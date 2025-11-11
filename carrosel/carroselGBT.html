@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Button</title>
+  <style>
+    html {
+      scroll-behavior: smooth; /* rolagem suave */
+    }
+
+    body {
+      height: 200vh;
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+    }
+
+    #topo {
+      background: #222;
+      color: white;
+    }
+
+    #sobre {
+      background: #0099ff;
+      color: white;
+    }
+
+    .scroll-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #0099ff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 15px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      transition: background 0.3s;
+    }
+
+    .scroll-button:hover {
+      background: #0077cc;
+    }
+  </style>
+</head>
+<body>
+  <section id="topo">
+    <a href="#sobre" class="scroll-button">↓</a>
+    Topo da página
+  </section>
+
+  <section id="sobre">
+    <a href="#topo" class="scroll-button">↑</a>
+    Seção Sobre
+  </section>
+</body>
+</html>

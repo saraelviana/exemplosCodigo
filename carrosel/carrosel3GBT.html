@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Carrossel — Corrigido (9 imagens)</title>
+  <style>
+    /* reset mínimo */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #222;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      padding: 24px;
+    }
+
+    /* container visível do carrossel */
+    .carousel {
+      --n: 9;                /* número de slides (mantém sincronia com JS) */
+      width: 90%;
+      max-width: 1000px;
+      background: #111;
+      border-radius: 12px;
+      overflow: hidden;     /* esconde o restante do track */
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+      position: relative;
+    }
+
+    /* track que contém todas as imagens lado a lado */
+    .carousel-track {
+      display: flex;
+      width: calc(var(--n) * 100%); /* largura total = n vezes a largura visível */
+      transition: transform 0.7s ease-in-out;
+      will-change: transform;
+    }
+
+    /* cada "slide" tem largura exata = 100% / n (uma tela por slide) */
+    .carousel-slide {
+      flex: 0 0 calc(100% / var(--n));
+      display: block;
+      user-select: none;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 500px;          /* ajuste a altura que preferir */
+      display: block;
+      object-fit: cover;      /* preenche o slide sem distorcer */
+      -webkit-user-drag: none;
+    }
+
+    /* botões */
+    .btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: rgba(0,0,0,0.45);
+      border: none;
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.12s;
+    }
+    .btn:hover { background: rgba(255,255,255,0.12); transform: translateY(-50%) scale(1.03); }
+    .btn:active { transform: translateY(-50%) scale(.98); }
+
+    .btn.prev { left: 16px; }
+    .btn.next { right: 16px; }
+
+    /* responsivo: altura menor em telas pequenas */
+    @media (max-width: 720px) {
+      .carousel-slide img { height: 320px; }
+      .btn { width: 38px; height: 38px; font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="carousel" id="carousel">
+    <button class="btn prev" aria-label="Anterior">&#10094;</button>
+
+    <!-- track: largura = n * 100% -->
+    <div class="carousel-track">
+      <!-- cada slide com uma imagem -->
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=1" alt="1"></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=2" alt="2"></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=3" alt="3"></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=4" alt="4"></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=5" alt="5"></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=6" alt="6"></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=7" alt="7"></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=8" alt="8"></div>
+      <div class="carousel-slide"><img src="https://picsum.photos/1200/700?random=9" alt="9"></div>
+    </div>
+
+    <button class="btn next" aria-label="Próxima">&#10095;</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const carousel = document.getElementById('carousel');
+      if (!carousel) return;
+
+      const track = carousel.querySelector('.carousel-track');
+      const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+      const total = slides.length;
+      const prevBtn = carousel.querySelector('.prev');
+      const nextBtn = carousel.querySelector('.next');
+
+      // sincroniza a variável CSS --n com o número de slides (caso altere sem atualizar HTML)
+      carousel.style.setProperty('--n', total);
+
+      if (!track || total === 0) return;
+
+      let index = 0;
+
+      function update() {
+        // deslocamento em porcentagem relativo ao track:
+        // cada slide tem largura = (100 / total) % do track,
+        // então para avançar 1 slide devemos mover -index * (100 / total) %
+        const shiftPct = -index * (100 / total);
+        track.style.transform = `translateX(${shiftPct}%)`;
+      }
+
+      nextBtn && nextBtn.addEventListener('click', () => {
+        index = (index + 1) % total;
+        update();
+      });
+
+      prevBtn && prevBtn.addEventListener('click', () => {
+        index = (index - 1 + total) % total;
+        update();
+      });
+
+      // teclado
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { index = (index + 1) % total; update(); }
+        if (e.key === 'ArrowLeft')  { index = (index - 1 + total) % total; update(); }
+      });
+
+      // garante posição inicial correta
+      update();
+    });
+  </script>
+</body>
+</html>

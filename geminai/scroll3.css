@@ -1,0 +1,83 @@
+/* RESET E ESTILOS GERAIS */
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+.vertical-spacer {
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.horizontal-section {
+    padding: 20px 0;
+    background-color: #f4f4f4;
+}
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 1. CONTÊINER DE ROLAGEM HORIZONTAL */
+.cards-container {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding: 20px;
+    gap: 20px; 
+    scroll-snap-type: x mandatory; 
+    
+    /* Configuração da Scroll Timeline (mantida) */
+    scroll-timeline-axis: x;
+}
+
+/* 2. ESTILO E RESPONSIVIDADE DO CARD */
+.card {
+    flex-shrink: 0;
+    height: 200px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+    scroll-snap-align: start; 
+    
+    /* === APRIMORAMENTO RESPONSIVO === */
+    /* A largura agora é calculada: 80% da viewport, 
+       menos a metade do espaçamento (gap) em cada lado, 
+       garantindo que o card ocupe a maior parte da tela em dispositivos móveis.
+    */
+    width: calc(100vw - 60px); 
+    max-width: 400px; /* Limita a largura em telas maiores para não ficar exagerado */
+    
+    /* ANIMAÇÃO (mantida) */
+    animation: rotate-on-scroll linear forwards;
+    animation-timeline: scroll(nearest inline);
+}
+
+/* 3. KEYFRAMES E MEDIA QUERIES (Opcional, mas recomendado) */
+@keyframes rotate-on-scroll {
+    from {
+        transform: rotateY(30deg) scale(0.9);
+        opacity: 0.5;
+    }
+    to {
+        transform: rotateY(0deg) scale(1);
+        opacity: 1;
+    }
+}
+
+/* @media query para desativar a animação em dispositivos que preferem 
+   movimento reduzido (melhorando a acessibilidade) 
+*/
+@media (prefers-reduced-motion: reduce) {
+    .card {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}

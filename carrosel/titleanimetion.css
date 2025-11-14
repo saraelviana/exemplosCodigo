@@ -1,0 +1,102 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*1 o bdy*/
+body{
+    
+    display: flex;/*vamos colocar o card no centro*/
+    justify-content: center;/*vamos colocar o card no centro*/
+    align-items: center;/*vamos colocar o card no centro*/
+
+    min-height: 100vh;/*altura minima da pagina*//*se nao ele nao vai pro centro*/
+
+    background: linear-gradient(90deg , #0868b2,#2563eb,#4f46e5);
+    
+
+}
+.card{
+    display: flex;/*ja jogou para o meio a frase*/
+    justify-content: center;
+    width: 350px;
+    height: 300px;
+    position: relative;/*tem que ser relativa para ajudar a fazer a animação*/
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 35px 80px rgba(0, 0, 0, 0.15);
+    transition: 0.5s
+}
+/*agora vamos fazer a animação , para quando for passar o mouse por cima aumentar o tamanho do card tambem*/
+.card:hover{
+    /*o que vai acontecer, vai aumentar a altura*/
+    height: 400px;
+    /*agora precisa fazer uma transição para ficar mais leve isso,tem que colocar um transition dentro da class . card*/
+
+
+}
+/*vamos mexer na iamgem esta muito grande e colocar no local certo*/
+.card .img-box{
+    position: absolute;/* */
+    width: 250px;
+    height: auto;
+    top: 0px;/*para ela ficar no top,para quando fizer o hover vai ficar melhor*/
+    transition: 0.5s;
+
+
+}
+/*---------*/
+/*vamos adicionar um hover nele para o efeito*/
+.card:hover .img-box{
+    /*para quando o mouse passar por cima da imagem e nao do card o efeito do hover sera chamado*/
+    top: -100px;/*assim o desenho(card) da o efeito de subir*/
+    scale: 0.75;/*pra diminuir a imagem */
+    /*transition: 0.5s/*para ficar mas leta**************/
+
+
+}
+/*------*/
+
+.card .img-box img{
+    /*vamos trabalhar a imagem que ficou um poquinho grande*/
+    width: 100%;/*de largura*/
+    height: 100%;/*a altura tambem*/
+    object-fit: cover;/*pra nao perder a qualidade dela*/
+
+}
+/*vamos trabalhar o texto do card*/
+.card .content{
+    /*pois e nesta div que esta o texto*/
+    display: flex;
+    flex-direction: column;
+    gap:18px ;
+    position: absolute;
+   /* position: relative;***********/
+    top: 250px;/*para o texto descer*/
+    width: 100%;
+    padding: 0px 30px;
+    text-align: center;
+    height: 30px;
+    overflow: hidden;/*e aqui ele esconde o texto,agora tem que fazer a animação para o texto voltar a aparecer*/
+    transition: 0.5s/*para ficar mas leta*/
+
+}
+/*assim a animação de retorno do texto*/
+.card:hover .content{
+    top: 130px;
+    height: 250px;/*agora voltando deste,->top: 250px;/*para o texto descer*/
+
+}
+/*agora o botao*/
+
+.card .read-more {
+   background: linear-gradient(90deg, #3730a3, #7e22ce);
+   padding: 12px;
+   color: #fff;
+   text-decoration: none;
+   border-radius: 8px;
+}
+

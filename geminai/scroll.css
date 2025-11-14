@@ -1,0 +1,38 @@
+/* Estilos básicos para o layout */
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+main {
+    padding: 20px;
+    /* Torna o conteúdo longo para forçar a rolagem */
+    min-height: 250vh; 
+}
+
+/* 1. DEFINE A ANIMAÇÃO DE PROGRESSO */
+@keyframes progress {
+    from {
+        width: 0; /* Começa com 0% de largura */
+    }
+    to {
+        width: 100%; /* Termina com 100% de largura */
+    }
+}
+
+/* 2. ESTILIZA A BARRA E APLICA A ANIMAÇÃO */
+.progress-bar {
+    height: 5px;
+    background-color: #2196F3;
+    position: fixed; /* Fixa no topo da viewport */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    /* APLICAÇÃO DA ANIMAÇÃO */
+    animation: progress linear forwards;
+    
+    /* CHAVE: LIGA A ANIMAÇÃO À ROLAGEM */
+    /* scroll(root block) -> Usa o elemento raiz (toda a página) e o eixo vertical (block/y) */
+    animation-timeline: scroll(root block); 
+}

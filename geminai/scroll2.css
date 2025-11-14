@@ -1,0 +1,41 @@
+/* 1. DEFINE A ANIMAÇÃO DE ENTRADA NA VIEWPORT */
+@keyframes fade-and-spin {
+    /* 0% na timeline de visualização: o elemento está totalmente fora da viewport (abaixo) */
+    from {
+        opacity: 0;
+        transform: translateY(50px) rotate(-10deg);
+    }
+    /* 100% na timeline de visualização: o elemento está totalmente na viewport */
+    to {
+        opacity: 1;
+        transform: translateY(0) rotate(0);
+    }
+}
+
+/* 2. ESTILIZA AS CAIXAS E APLICA A ANIMAÇÃO */
+.animated-box {
+    height: 200px;
+    width: 80%;
+    margin: 50vh auto; /* Usa unidades de viewport para que haja espaço entre elas */
+    background-color: #FFC107;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-size: 1.5em;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+    /* Define o estado inicial para evitar que apareçam antes do scroll */
+    opacity: 0; 
+    
+    /* APLICAÇÃO DA ANIMAÇÃO */
+    animation: fade-and-spin linear forwards;
+    
+    /* CHAVE: LIGA A ANIMAÇÃO À VISIBILIDADE DO ELEMENTO */
+    /* view() -> A animação é controlada pelo quanto o elemento está visível no contêiner de rolagem */
+    animation-timeline: view(); 
+    
+    /* Opcional: define quando a animação deve começar e terminar no ciclo de visualização */
+    animation-range: entry 20% cover 50%;
+}

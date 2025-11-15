@@ -1,0 +1,61 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/*vamos pro fundo - CONTAINER*/
+#container{
+    height: 100vh;
+    width: 100%;/*fundo todo*/
+
+    display: flex;/*ja alinha os itens no centro*/
+    align-items: center;/*centralizando*/
+    justify-content: center;
+
+    background-color: burlywood;
+    /*background-image: url();usar imagem*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover; pra cobrir tudo*/
+
+}
+
+/*tem que trabalhar a imagem tambem*/
+.flip-card-img{
+    width: 100%;/*vai ser de 100% do espaço disponivel*/
+    height: 100%;/*100% disponivel*/
+    object-fit: cover;/*para nao perder a resolução*/
+    border-radius: 30px;
+    perspective: 1000px;
+
+}
+/*vamos para o fli-card*/
+.flip-card{
+    width:300px;/*largura da carta*/
+    height: 450px;/*altura*/
+
+}
+
+/*vai chamar para posicionar os elementos*/
+.flip-card-inner{
+    position: relative;/*agora temos que informar que as outras imagens sao absolutas sobre a outra imagem,*/
+    transform-style: preserve-3d;
+
+}
+.flip-card-front, 
+.flip-card-back {
+    position: absolute;/*esta sera absoluta, vai sobrepor a position relative*/
+    backface-visibility: hidden;/*outro efeito*/
+
+
+}
+/*ja esta uma cobrindo a outra, vamos fazer a animação*/
+.flip-card:hover .flip-card-inner{
+    transform: rotateY(-180deg);/*este sera o que vai rotacionar*/
+
+}
+.flip-card-back {
+    transform: rotateY(-180deg);/*se quiser mudar o lado do giro e so tira o sinal - deixae so o 180*/
+
+}
+/*pra funcionar direito tem que colocar um 3d, vamos colocar la no .flip-card-inner*/
+

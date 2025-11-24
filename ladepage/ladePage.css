@@ -56,7 +56,8 @@ body{
     font-family: 'Courier New', Courier, monospace;
     font-weight:400px ;/*o peso da fonte*/
     font-size: 64px;/*o tamanho da fonte*/
-    color: white;/*cor da fonte*/
+    color: rgb(124, 3, 3);/*cor da fonte*/
+    
 
 }
 .conteudo-principal-escrito-subtitulo{
@@ -65,6 +66,39 @@ body{
     font-size: 24px;
     color: white;
 }
+.conteudo-principal-escrito-botao{
+    background-color: cadetblue;/*cor do botao*/
+    width: 180px;/*largura*/
+    height: 60px;/*altura*/
 
+    border:none;/*tirar uma pequena bordar que tinha*/
+    border-radius:20px ;
+    box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 400;
+    font-size: 24px;
+    color:black;
+}
+/*imagem*/
+.conteudo-principal-img{
+    height: 430px;
+
+}
+/*fim*/
+.conteudo-secundario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin-top: 48px;
+
+}
+/*risquinho*/
+.conteudo-secundario-titulo{
+    border-top: 0.4px solid #FFF2E7;
+    padding-top: 48PX;/*ESTA MUITO GRUDADO*/
+
+}
 
 

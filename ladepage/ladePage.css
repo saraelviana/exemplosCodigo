@@ -97,8 +97,37 @@ body{
 /*risquinho*/
 .conteudo-secundario-titulo{
     border-top: 0.4px solid #FFF2E7;
+    /*
+    Desafio: A borda que separa os conteúdos primário e secundário é menor porque o border-top foi colocado no <h3 class="conteudo-secundario-titulo"> e não na <section class="conteudo-secundário">, com isso a borda acompanhará o tamanho do título apenas.
+    
+    
+    *
     padding-top: 48PX;/*ESTA MUITO GRUDADO*/
+    font-family:'Times New Roman', Times, serif;
+    font-weight: 400;
+    font-size: 24px;
+    color: white;
+    margin-bottom: 16px;
 
 }
+.conteudo-secundario-paragrafo{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 300;
+    font-size: 18px;
+    color: white;
+
+}
+.rodape{
+    padding: 32px;
+    border-top: 0.4px solid #FFF2E7;
+
+}
+.odape-img{
+    height: 48px;
+    display: block;/*para mexer apenas 1 imagem,bloco vai utilizar todo espaço que tem*/
+    margin: 0 auto;/*vai centralizar a imagem */
+
+}
+
 
 

@@ -1,0 +1,87 @@
+body{
+    box-sizing: border-box;
+    margin: o;
+    padding: o;
+    background-color: rgb(48, 47, 47);
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/*todos os itens- formatação fixa tela grande*/
+li, a, button{
+    font-size: 18px;/*tamanho*/
+    color: white;/*cor da fonte*/
+    text-decoration: none;/*remover o traço debaico*/
+
+}
+/*vamos trabalhar o header, que e todo o menu*/
+header{
+    display: flex;/*ativação*/
+
+    /*justify-content: space-between;/*criar um espaçamento entre eles dentro do elemento*/
+
+    justify-content: flex-end;/*deixar o menu no canto,por ter poucos itens fica melho,mas alterar logo*/
+
+    align-items: center;/*alinhamento na vertical*/
+    padding: 20px 15px;/*de 20 e encima e em baixo 15 na horizontal*/
+    background-color: black;
+}
+.logo{
+    color: white;
+    font-size: 35px;
+    font-weight: bold;/*negrito*/
+
+    margin-right: auto;/*empurrar o logo para esquerda.. apos altera o justify-content: space-between para flex-end*/
+
+}
+.nav-links{
+    list-style: none;/*nao quero nenhum estylo pra ela,removendo as bolinhas*/
+
+
+}
+.nav-links li{
+    /*CUIDADO ERRO GRAVE.. eu deixei assim:.nav-links-li e isso impedia de deixar los na horizontal
+    o CORRETO : .nav-links li  ---*/
+    display: inline-block;/*vai ficar todos na mesma linha*/
+    padding: 0 20px;/*em cima e em baixo 0 e direita e esquerda com 20*/
+
+}
+.nav-links li a:hover{
+    /*TODOS OS LI que contem um A , ao passar o mouse por cima ,tera um efeito*/
+
+    color: rgb(111, 207, 207);/*cor ao passar o mouse*/
+
+
+}
+button{
+    padding: 10px 20px;/*em cima em baixo 10 e direita e esquerda 20*/
+    background-color: rgb(1, 206, 206);
+    border: none;/*remover a borda*/
+    border-radius: 60px;/*arredondar*/
+    cursor: pointer;
+    margin-left: 15px;/*dar um espacamento do botao para o menu*/
+}
+button:hover{
+    background-color: rgb(136, 223, 223);/*cor ao passar o mouse*/
+}
+
+
+/*resposnssividade*/
+@media (max-width:768px){
+
+    /* este e o criterio-max-width:768px.. enquanto estiver no tamanho maximo de 768px o que deseja aplicar)*/
+
+    /*assim ele vai ocultas os itens do menu toda vez que diminuir a tela*/
+    /*.nav-links{
+        display: none;/*esconder o menu*/
+    /*}*/
+
+
+    li, a, button {
+        font-size: 14px;/*tamanho menor*/
+
+    };
+    logo{
+        font-size: 15px;/*tamanho menor*/
+    }
+
+}

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <title>Simulação Modo Kiosk — Corrigido</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0f1720;
+      --panel: #111827;
+      --accent: #0ea5ff;
+      --text: #e6eef8;
+    }
+
+    * { box-sizing: border-box; }
+    html,body { height:100%; margin:0; font-family: Arial, Helvetica, sans-serif; background:var(--bg); color:var(--text); -webkit-user-select:none; user-select:none; }
+    /* controle inicial */
+    .center {
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    #controls {
+      background: linear-gradient(180deg,#0b1220,#141827);
+      padding:28px;
+      border-radius:12px;
+      width:360px;
+      text-align:center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    }
+    #controls h1 { margin:0 0 10px 0; font-size:20px; }
+    #controls p { margin:0 0 18px 0; color:#b9c6d6; font-size:14px; }
+
+    button {
+      background:var(--accent);
+      color:#042033;
+      border:none;
+      padding:12px 18px;
+      border-radius:10px;
+      font-weight:700;
+      cursor:pointer;
+      font-size:16px;
+    }
+    button.secondary {
+      background:transparent;
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.06);
+      margin-left:10px;
+      padding:10px 14px;
+      font-weight:600;
+    }
+
+    /* tela kiosk (inicialmente oculta) */
+    #kioskScreen {
+      display:none;
+      position:fixed;
+      inset:0;
+      background:linear-gradient(180deg,#021124,#052234);
+      padding:40px;
+      color:var(--text);
+      overflow:hidden;
+    }
+    #kioskContent {
+      max-width:1000px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    #kioskLeft {
+      flex:1;
+      padding-right:30px;
+    }
+    #kioskLeft h2 { margin:0 0 12px 0; font-size:28px; letter-spacing:0.2px; }
+    #kioskLeft p { margin:0 0 8px 0; color:#b9c6d6; }
+
+    #kioskRight {
+      width:320px;
+      height:200px;
+      background:rgba(255,255,255,0.03);
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      font-size:20px;
+      color:#cfefff;
+    }
+
+    /* classe que mostra kiosk e esconde controles */
+    .kiosk-active #controls { display:none; }
+    .kiosk-active #kioskScreen { display:block; }
+
+    /* botão sair (visível apenas em desenvolvimento) */
+    #exitBtn {
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:10px;
+      cursor:pointer;
+      display:none; /* escondido para "kiosk", mas deixei para testes */
+    }
+    .show-exit #exitBtn { display:block; } /* só quando queria expor o botão para testes */
+  </style>
+</head>
+<body>
+
+  <div id="appRoot" class="center">
+    <div id="controls" role="region" aria-label="Controles">
+      <h1>Simulação Modo Kiosk</h1>
+      <p>Ao entrar no kiosk a página vai para tela cheia e exibe a interface de quiosque.</p>
+      <div>
+        <button id="enterBtn">Entrar no Kiosk</button>
+        <!-- botão secundário só para teste local -->
+        <button id="testBtn" class="secondary">Mostrar botão de sair (teste)</button>
+      </div>
+    </div>
+
+    <!-- tela que será exibida como "quiosque" -->
+    <div id="kioskScreen" aria-hidden="true">
+      <div id="kioskContent">
+        <div id="kioskLeft">
+          <h2>Bem-vindo ao Kiosk</h2>
+          <p>Tela travada no aplicativo. Exemplos de uso: totens, painéis, checklists.</p>
+          <p>Pressione <strong>F11</strong> ou o botão de fullscreen do navegador se necessário.</p>
+        </div>
+
+        <div id="kioskRight">
+          AREA DO PAINEL
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- botão de sair (útil só em desenvolvimento) -->
+  <button id="exitBtn" title="Sair do Kiosk">Sair do Kiosk</button>
+
+<script>
+  const enterBtn = document.getElementById('enterBtn');
+  const exitBtn  = document.getElementById('exitBtn');
+  const appRoot  = document.getElementById('appRoot');
+  const kioskScreen = document.getElementById('kioskScreen');
+  const testBtn = document.getElementById('testBtn');
+
+  // solicita fullscreen e ativa a interface kiosk
+  async function enterKiosk() {
+    try {
+      // primeiro pede fullscreen
+      if (document.documentElement.requestFullscreen) {
+        await document.documentElement.requestFullscreen();
+      } else if (document.documentElement.webkitRequestFullscreen) {
+        await document.documentElement.webkitRequestFullscreen();
+      }
+      // ativa a interface kiosk (esconde controles, mostra tela do quiosque)
+      document.documentElement.classList.add('kiosk-active');
+      kioskScreen.setAttribute('aria-hidden', 'false');
+
+      // tentativas de "endurecer" a experiência (não é 100% eficaz)
+      blockContextMenu();
+      blockCertainKeys();
+    } catch (err) {
+      console.warn('Falha ao entrar em fullscreen:', err);
+      alert('Não foi possível entrar em tela cheia. Tente permitir fullscreen no navegador.');
+    }
+  }
+
+  // sai do fullscreen e restaura UI
+  async function exitKiosk() {
+    try {
+      if (document.exitFullscreen) {
+        await document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        await document.webkitExitFullscreen();
+      }
+    } catch(e) { console.warn(e); }
+
+    // restaura interface
+    document.documentElement.classList.remove('kiosk-active');
+    kioskScreen.setAttribute('aria-hidden', 'true');
+
+    // remove bloqueios
+    unblockContextMenu();
+    unblockCertainKeys();
+  }
+
+  // bloqueia clique direito (padrão)
+  function onContextMenu(e) { e.preventDefault(); }
+  function blockContextMenu() { document.addEventListener('contextmenu', onContextMenu); }
+  function unblockContextMenu() { document.removeEventListener('contextmenu', onContextMenu); }
+
+  // tenta bloquear combinações de tecla comuns (não garante proteção contra tudo)
+  function onKeyDown(e) {
+    // Combinações comuns que tentamos bloquear (F12, Ctrl+W, Ctrl+T, Ctrl+Shift+I)
+    if (e.key === 'F12') { e.preventDefault(); e.stopPropagation(); }
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'w') { e.preventDefault(); e.stopPropagation(); }
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 't') { e.preventDefault(); e.stopPropagation(); }
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'i') { e.preventDefault(); e.stopPropagation(); }
+    // ESC geralmente sai do fullscreen — não podemos impedir isso nos navegadores modernos.
+  }
+  function blockCertainKeys() { document.addEventListener('keydown', onKeyDown, true); }
+  function unblockCertainKeys() { document.removeEventListener('keydown', onKeyDown, true); }
+
+  // lidar com mudança de fullscreen (se o usuário apertar ESC e sair, restauramos a UI)
+  function onFullscreenChange() {
+    const fsElement = document.fullscreenElement || document.webkitFullscreenElement;
+    if (!fsElement) {
+      // saiu do fullscreen: volta à tela de controles
+      document.documentElement.classList.remove('kiosk-active');
+      kioskScreen.setAttribute('aria-hidden', 'true');
+      unblockContextMenu();
+      unblockCertainKeys();
+    }
+  }
+
+  document.addEventListener('fullscreenchange', onFullscreenChange);
+  document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+
+  // eventos de botões
+  enterBtn.addEventListener('click', enterKiosk);
+  exitBtn.addEventListener('click', exitKiosk);
+  testBtn.addEventListener('click', () => {
+    // apenas para desenvolvimento: mostra botão de sair
+    document.documentElement.classList.toggle('show-exit');
+  });
+
+  // instrução útil para o usuário testar: alguns navegadores exigem interação direta para permitir fullscreen
+  // e podem não permitir certos bloqueios por razões de segurança.
+</script>
+</body>
+</html>

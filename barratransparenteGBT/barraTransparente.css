@@ -1,0 +1,77 @@
+/* Configurações Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    color: white; /* Cor do texto principal */
+}
+
+/* Seção do Hero (Fundo com Imagem) */
+.hero-section {
+    /* Substitua a URL abaixo pela imagem que desejar */
+    background-image: url('https://picsum.photos/1600/900'); 
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* Ocupa 100% da altura da tela */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Barra de Navegação */
+.navbar {
+    /* Preto com 70% de opacidade (rgba(0, 0, 0, 0.7)) */
+    background-color: rgba(0, 0, 0, 0.7); 
+    padding: 15px 20px;
+}
+
+.nav-list {
+    list-style: none; /* Remove os marcadores de lista */
+    display: flex;
+    /* Alinha os itens para ocuparem o espaço, mantendo a responsividade */
+    justify-content: space-around; 
+    align-items: center;
+}
+
+.nav-item a {
+    text-decoration: none; /* Remove sublinhado do link */
+    color: white;
+    font-size: 1.1rem;
+    padding: 10px 15px;
+    display: block;
+    transition: color 0.3s;
+}
+
+.nav-item a:hover {
+    color: #cccccc; /* Mudar a cor ao passar o mouse */
+}
+
+/* Conteúdo de Exemplo */
+.hero-content {
+    flex-grow: 1; /* Faz o conteúdo ocupar o espaço restante */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    /* Adiciona uma sombra suave para melhor legibilidade */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+}
+
+/* Responsividade (Para Smartphones) */
+@media (max-width: 600px) {
+    .nav-list {
+        /* Altera a direção para coluna em telas pequenas */
+        flex-direction: column; 
+        gap: 10px; /* Espaço entre os itens */
+    }
+
+    .nav-item {
+        width: 100%; /* Faz cada item ocupar toda a largura */
+        text-align: center;
+    }
+}
